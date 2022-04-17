@@ -19,7 +19,7 @@ export CLUSTER_NAME=<your-cluster-name>.<your-domain-name>.com (Make sure that y
 export KOPS_STATE_STORE=s3://<your-cluster-name>-<your-domain-name>-state-store
 ```
 
-## Create Kubernetes on AWS
+## Create Kubernetes Cluster on AWS
 
 Use the following cops command to create the cluster:
 
@@ -37,3 +37,32 @@ kops create cluster --name=${CLUSTER_NAME} \
 ```
 
 Above command creates a VPC (with private/public subnets, IGW, NGW, Route Tables) and a k8s cluster with 1 master node and 2 worker nodes. 
+
+## Deploy ArgoCD
+
+```
+kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+# access ArgoCD UI
+kubectl get svc -n argocd
+kubectl port-forward svc/argocd-server 8080:443 -n argocd
+
+# login with admin user and below password:
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 --decode && echo
+```
+
+## Deploy using ArgoCD
+```
+kubectl apply -f nginx-application.yaml
+```
+
+## Update your application
+- Change the version of the nginx in the nginx/deployment.yaml file and push the changes to git repo. 
+- ArgoCD will check for changes every 3 minutes and redeploy if new changes found 
+
+## Delete Kubernetes Cluster
+
+```
+kops delete cluster --name=${CLUSTER_NAME} --state ${KOPS_STATE_STORE} --yes
+```
