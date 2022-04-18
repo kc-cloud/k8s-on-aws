@@ -33,7 +33,8 @@ kops create cluster --name=${CLUSTER_NAME} \
     --node-size t2.medium \
     --node-count 2 \
     --networking calico \
-    --topology private
+    --topology private \
+    --kubernetes-version "1.20.13"
 ```
 
 Above command creates a VPC (with private/public subnets, IGW, NGW, Route Tables) and a k8s cluster with 1 master node and 2 worker nodes. 
