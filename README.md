@@ -12,11 +12,11 @@ AmazonSQSFullAccess
 AmazonEventBridgeFullAccess
 ```
 - Configure the user locally
-- Create s3 bucket for storing the kops state (For example, s3://<your-cluster-name>-<your-domain-name>-state-store)
+- Create s3 bucket for storing the kops state (For example, s3://&lt;your-cluster-name>-&lt;your-domain-name>-state-store)
 - Setup the following environment variables:
 ```
 export CLUSTER_NAME=<your-cluster-name>.<your-domain-name>.com (Make sure that you have a domain procured in AWS)
-export KOPS_STATE_STORE=s3://&ltyour-cluster-name&gt-&ltyour-domain-name&gt-state-store
+export KOPS_STATE_STORE=s3://<your-cluster-name>-<your-domain-name>-state-store
 ```
 
 ## Create Kubernetes Cluster on AWS
