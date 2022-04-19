@@ -16,7 +16,7 @@ AmazonEventBridgeFullAccess
 - Setup the following environment variables:
 ```
 export CLUSTER_NAME=<your-cluster-name>.<your-domain-name>.com (Make sure that you have a domain procured in AWS)
-export KOPS_STATE_STORE=s3://<your-cluster-name>-<your-domain-name>-state-store
+export KOPS_STATE_STORE=s3://&ltyour-cluster-name&gt-&ltyour-domain-name&gt-state-store
 ```
 
 ## Create Kubernetes Cluster on AWS
